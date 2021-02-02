@@ -1,4 +1,4 @@
-module github.com/siliconvalley001/project1/web
+module github.com/siliconvalley001/wen/web
 
 go 1.15
 
