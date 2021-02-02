@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "proto;product";
+
+
+service MetaService {
+ rpc GetMetaById(MetaByIdRequest)returns(MetaResponse){}
+ rpc GetMetaByName(MetaByNameRequest)returns(MetaResponse){}
+ rpc GetMetaAll(MetaAllRequest)returns(MetaAllResponse){}
+ //rpc InsertMeta(InsertMetaRequest)returns (MetaResponse){}
+}
+message InsertSonMetaRequest{
+  int64  id=1;
+  string authname=2;
+  string path=3;
+  repeated InsertSonMetaRequest children=4;
+}
+message InsertMetaRequest{
+  int64  id=1;
+  string authname=2;
+  string path=3;
+  repeated   InsertSonMetaRequest  children=4;
+}
+message MetaInfo {
+  int64  id=1;
+  string authname=2;
+  string path=3;
+  repeated   InsertSonMetaRequest  children=4;
+}
+
+
+message MetaByIdRequest{
+  int64  id=1;
+}
+
+message MetaByNameRequest{
+    string name=1;
+
+}
+
+message MetaResponse{
+  string msg=1;
+  int64 status=2;
+}
+message MetaAllRequest{
+
+}
+
+
+message MetaAllResponse{
+  repeated MetaInfo info=1;
+  string msg=2;
+  int64 status=3;
+}
+
+
+
+

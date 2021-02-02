@@ -1,0 +1,110 @@
+definitions:
+  response.Response:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      msg:
+        type: object
+    type: object
+  user.UserLoginResponse:
+    properties:
+      code:
+        type: integer
+      login_time:
+        type: string
+      msg:
+        type: string
+      nick_name:
+        type: string
+      token:
+        type: string
+    type: object
+  user.UserLoginResquest:
+    properties:
+      nick_name:
+        type: string
+      password:
+        type: string
+    type: object
+  user.UserRegisterRequest:
+    properties:
+      avatar:
+        type: string
+      name:
+        type: string
+      nickName:
+        type: string
+      password:
+        type: string
+      rePassword:
+        type: string
+      sex:
+        type: integer
+      tel:
+        type: string
+    type: object
+  user.UserRegisterResponse:
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: 用户登陆
+      operationId: /user/login
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserLoginResquest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/user.UserLoginResponse'
+              type: object
+      summary: 用户登陆
+      tags:
+      - 用户登陆接口
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: 用户注册
+      operationId: /user/register
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/user.UserRegisterResponse'
+              type: object
+      summary: 用户注册
+      tags:
+      - 用户注册接口
+swagger: "2.0"
